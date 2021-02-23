@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Ordenar elementos</title>
+  </head>
+  <body style=" background: #FDF2E9">
+    <div class="container my-5 text-center">
+        <button class="btn  w-20" style="background: #ffe0e9" onclick="traer()">Obtener</button>
+        <div class="mt-5">
+            <table class="table table-striped" style="border-collapse:separate;border-spacing:2px;border-color:#ddd;">
+                <thead>
+                  <tr>
+                    <th class="table-primary" scope="col">Codigo de hotel</th>
+                    <th class="table-info" scope="col">Marca</th>
+                    <th class="table-danger" scope="col">Etiqueta</th>
+                    <th class="table-active" scope="col">
+                        
+                    </th>
+                    
+                  </tr>
+                </thead>
+                <tbody id="contenido">
+                  
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <script>
+
+        var contenido = document.querySelector('#contenido')
+
+        function traer()  {
+            fetch('https://www.cityexpress.com/data/autocomplete.json')
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data)
+                tabla(data)
+            })
+        }
+
+        function tabla (data){
+            //console.log(data)
+            contenido.innerHTML=''
+            for (let valor of data){
+                //console.log(valor)
+                contenido.innerHTML += `
+                <tr>
+                    <td class="table-primary" scope="row">${valor.codigo}</td>
+                    <td class="table-info">${valor.marca}</td>
+                    <td class="table-danger" >${valor.label}</td>
+                    <td class="table-active" >
+                    <button class="btn  w-20" style="background: 	#CDCDCD">
+                            Eliminar
+                        </button>
+                        </td>
+                  </tr> 
+                  `
+            }
+
+        }
+    </script>
+</body>
+</html>

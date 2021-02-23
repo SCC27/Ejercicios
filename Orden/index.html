@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Ordenar elementos</title>
+  </head>
+  <body style=" background: #EAECEE">
+    <div class="container my-5 text-center">
+        <button class="btn  w-20" style="background: #D7DBDD" onclick="traer()">Obtener</button>
+        <div class="mt-5">
+            <table class="table table-striped" style="border-collapse:separate;border-spacing:2px;border-color:#ddd;">
+                <thead>
+                  <tr>
+                    <th class="table-active" scope="col">User ID</th>
+                    <th class="table-active" scope="col">Titulo</th>
+                    <th class="table-active" scope="col">Descripcion</th>
+                    
+                        
+                    </th>
+                    
+                  </tr>
+                </thead>
+                <tbody id="contenido">
+                  
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <script>
+
+        var contenido = document.querySelector('#contenido')
+
+        function traer()  {
+            fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data)
+                tabla(data)
+            })
+        }
+
+        function tabla (data){
+            //console.log(data)
+            contenido.innerHTML=''
+
+            for (let valor of data){
+                //console.log(valor)
+                contenido.innerHTML += `
+                <tr>
+                    <td class="table-active" scope="row">${valor.userId}</td>
+                    <td class="table-active">${valor.title}</td>
+                    <td class="table-active" >${valor.body}</td>
+                    
+                  </tr> 
+                  `
+            }
+
+        }
+    </script>
+</body>
+</html>
